@@ -1,5 +1,6 @@
 package brcomkassin.events;
 
+import brcomkassin.cuboid.CuboID;
 import brcomkassin.cuboid.CuboIDMananger;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,10 +14,13 @@ public final class PlayerMoveListener implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (cuboIDMananger.getCuboID("teste").hasPlayer(player)) {
-            player.sendMessage("contem player!");
-            cuboIDMananger.handlePlayerEnterExitCubo(player,"Bem vindo a área!", "Volte sempre a essa área!");
+        CuboID cuboID = cuboIDMananger.getCuboID("teste");
+
+        if (cuboID.hasPlayer(player)) {
+            cuboID.handlePlayerEnterCubo();
+            return;
         }
+        cuboID.handlePlayerExitCubo();
     }
 
 }

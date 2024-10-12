@@ -37,4 +37,10 @@ public class CuboID {
                 && (z >= zMin && z <= zMax);
     }
 
+    public void handlePlayerEnterCubo() {
+    }
+
+    public void handlePlayerExitCubo() {
+    }
+
 }

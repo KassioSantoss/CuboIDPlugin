@@ -3,10 +3,9 @@ package brcomkassin.cuboid;
 import lombok.*;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import java.util.*;
 
-@Getter
+@Getter(value = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CuboIDMananger {
 
@@ -23,25 +22,23 @@ public final class CuboIDMananger {
     }
 
     public void create(Player player, String cuboidName, Location pos1, Location pos2) {
+        if (pos1 == null) {
+            player.sendMessage("Por favor, selecione uma posição primeiro!");
+            return;
+        }
+        if (pos2 == null) {
+            player.sendMessage("Por favor, selecione a segunda posição primeiro!");
+            return;
+        }
+
         if (CUBO_ID_MAP.containsKey(cuboidName)) {
             player.sendMessage("Já existe um cuboid com esse nome!");
             return;
         }
+
         this.cuboidName = cuboidName;
         CUBO_ID_MAP.put(cuboidName, new CuboID(pos1, pos2));
-        System.out.println(CUBO_ID_MAP);
         player.sendMessage("Área criada!");
-    }
-
-    public void handlePlayerEnterExitCubo(Player player, String enter, String exit) {
-
-        if (!playersInCubo.contains(player.getUniqueId())) {
-            player.sendMessage(enter);
-            playersInCubo.add(player.getUniqueId());
-            return;
-        }
-        player.sendMessage(exit);
-        playersInCubo.remove(player.getUniqueId());
     }
 
     public CuboID getCuboID(String nameCuboid) {

@@ -1,0 +1,6 @@
+name: CuboIDPlugin
+version: '1.0'
+main: brcomkassin.CuboIDPlugin
+api-version: '1.20'
+commands:
+  cuboid:
